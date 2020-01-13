@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 import LineChart  from '../../components/LineChart/LineChart.component';
 import { connect } from 'react-redux';
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import Table from '../../components/Table/Table.component';
 
 class VolumeReport extends Component {
     
     state = {
-        dataSet: {},
+        dataSet: [],
         labels: [],
         data: [],
     }
+    componentDidMount() {    
+        //If reportingData is already generated
+        if (this.props.fullData.length > 0) {
+            this.generateReportingData(this.props.fullData);
+        }
+      }
 
     generateReportingData = (fullData) => {
             // Filter out unnecessary data and convert date in string to Date
@@ -23,7 +30,7 @@ class VolumeReport extends Component {
             let aggregatedData = this.aggregateData(sortedDateAndVolumeRecords)
 
             // Calculate the average sum of volume per day
-            let averagedDataArray = this.averageData(aggregatedData);
+            let averagedDataArray = this.generateFinalData(aggregatedData);
             
             const labelArray = averagedDataArray.map(data => data["date_captured"]);
             const dataArray = averagedDataArray.map(data => data["average_volume_per_day"]);
@@ -57,12 +64,14 @@ class VolumeReport extends Component {
 
     // Input: aggregatedData
     // Output: [{"date_captured": "YYYY-MM", "average_volume_per_day": value<Number>}] 
-    averageData(aggregatedData) {
+    generateFinalData(aggregatedData) {
         let averagedDataArray = [];
+        let id = 0;
         for (let captureDate of Object.keys(aggregatedData)) {
             let averageDataObj = {
+                "id": ++id,
                 "date_captured": captureDate,
-                "average_volume_per_day": aggregatedData[captureDate]["sum_volume_per_day"] / aggregatedData[captureDate]["no_of_records"]
+                "average_volume_per_day": (aggregatedData[captureDate]["sum_volume_per_day"] / aggregatedData[captureDate]["no_of_records"]).toFixed(2)
             };
             averagedDataArray.push(averageDataObj)
         } 
@@ -71,24 +80,23 @@ class VolumeReport extends Component {
     }
 
   render() {
+
+    const table = this.state.dataSet.length > 0 ? <Table dataSet={this.state.dataSet}/> : null;
     return (
       <div className="">
         <MDBContainer>
-            <MDBRow>
+            <MDBRow style={{maxHeight: ''}}>
                 <MDBCol md="8">
-                    <LineChart title="Volume Report" 
-                            dataLabel = "Average Daily Traffic Volume Captured Per Month"
-                            labels={this.state.labels} 
-                            data={this.state.data}/>
+                    <LineChart 
+                        title="Volume Report" 
+                        dataLabel = "Average Daily Traffic Volume Captured Per Month"
+                        labels={this.state.labels} 
+                        data={this.state.data}/>
                  </MDBCol>
-                 <MDBCol md="4">
-                    <LineChart title="Volume Report" 
-                            dataLabel = "Average Daily Traffic Volume Captured Per Month"
-                            labels={this.state.labels} 
-                            data={this.state.data}/>
+                 <MDBCol md="4" style={{maxHeight: 'inherit' }}>
+                    {table}
                  </MDBCol>
             </MDBRow>
-
         </MDBContainer>
        
       </div>
