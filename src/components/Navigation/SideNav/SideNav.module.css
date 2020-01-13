@@ -4,7 +4,7 @@
     left: 0;
     z-index: 101;
     height: 100%;
-    width: 200px;
+    width: 250px;
     max-width: 70%;
     background-color: #2E2E2E;
     box-sizing: border-box;
@@ -18,11 +18,21 @@
     padding: 0;
 }
 
-.SideNav ul li{
-    padding: 8px 15px;
+.SideNav ul li {
     cursor: pointer;
 }
 
-.Active{
+.SideNav ul li a{
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    padding-bottom: 10px;
+    display: block;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.SideNav ul li a.active{
     background-color:#212121;
 }
