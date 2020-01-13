@@ -2,8 +2,14 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import axios from 'axios';
 import './App.css';
+import LineChart  from './components/line-chart/line-chart';
 
 class App extends Component {
+
+  state = {
+    labels: [],
+    data: [],
+  }
 
   componentDidMount() {
     axios.get("https://data.gov.au/data/api/3/action/datastore_search_sql?sql=SELECT%20*%20from%20%229e26683b-6b30-424e-ace7-59047d811d1c%22")
@@ -13,22 +19,30 @@ class App extends Component {
         let dateAndVolumeRecords = fullRecords.map(record => {
           return { "date_captured": this.dateConverter(record.date_captured),  "volume_per_day": record.volume_per_day}
         });
+        
         let sortedDateAndVolumeRecords = dateAndVolumeRecords.sort((a, b) => a.date_captured - b.date_captured);
         
         let aggregatedData = sortedDateAndVolumeRecords.reduce((aggregated, curData) => {
           let key = curData["date_captured"].getFullYear() + '-' + String(+curData["date_captured"].getMonth() + 1)
+          // let key = curData[]
           aggregated[key] = aggregated[key] || {};
-          aggregated[key]["volume_per_day"] =  aggregated[key]["volume_per_day"] ?  aggregated[key]["volume_per_day"] + curData.volume_per_day : curData.volume_per_day;
+          aggregated[key]["volume_per_day"] =  aggregated[key]["volume_per_day"] ?  +aggregated[key]["volume_per_day"] + +curData.volume_per_day : +curData.volume_per_day;
           aggregated[key]["no_of_records"] = ++aggregated[key]["no_of_records"] || 1;
-          return aggregated;
+          return aggregated;  
         },{});
 
         let reportingData = {};
         for (let captureDate of Object.keys(aggregatedData)) {
           reportingData[captureDate] = aggregatedData[captureDate]["volume_per_day"] / aggregatedData[captureDate]["no_of_records"];
         }
-        
-        console.log(reportingData);
+
+        const labelArray = Object.keys(reportingData);
+        const dataArray = Object.keys(reportingData).map(key => reportingData[key]);
+
+        this.setState({labels: labelArray, data: dataArray});
+
+
+        console.log(aggregatedData);
       })
   }
 
@@ -44,7 +58,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        
+        <LineChart labels={this.state.labels} data={this.state.data}/>
       </div>
     );
   }
