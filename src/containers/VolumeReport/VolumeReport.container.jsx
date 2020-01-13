@@ -86,14 +86,14 @@ class VolumeReport extends Component {
       <div className="">
         <MDBContainer>
             <MDBRow style={{maxHeight: ''}}>
-                <MDBCol md="8">
+                <MDBCol md="12"lg="8" className="my-3">
                     <LineChart 
                         title="Volume Report" 
                         dataLabel = "Average Daily Traffic Volume Captured Per Month"
                         labels={this.state.labels} 
                         data={this.state.data}/>
                  </MDBCol>
-                 <MDBCol md="4" style={{maxHeight: 'inherit' }}>
+                 <MDBCol md="12" lg="4" className="my-3">
                     {table}
                  </MDBCol>
             </MDBRow>
