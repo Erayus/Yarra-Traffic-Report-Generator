@@ -15,7 +15,7 @@ const sideNav = (props) => {
                 <nav>
                    <ul>
                        <li>
-                            <NavLink to="/" activeClassName={classes.active}>
+                            <NavLink to="/" exact activeClassName={classes.active}>
 
                                 <MDBIcon icon="chart-line" className="mr-2"/>Volume Per Day     
                             </NavLink>
