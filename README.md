@@ -1,5 +1,4 @@
 # Yarra Traffic Report Generator
-*Challenged by BLIX*
 
 ## Technology stack
 - **React:** This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -13,3 +12,4 @@
 ## Improvements:
 - Mobile UI
 - Generate Report for the "85th Percentile Speed"
+- Refactor Navigation Item to its own component (more reusable)

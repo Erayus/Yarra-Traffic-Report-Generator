@@ -89,7 +89,7 @@ class VolumeReport extends Component {
                 <MDBCol sm="12" md="8">
                     <div className="rounded z-depth-1 text-center pb-2">
                         <div className="py-3 text-white" style={{backgroundColor: '#33b5e5', fontSize: '20px'}}>
-                            <strong>Number Of Records</strong>
+                            <strong>NUMBER OF RECORDS</strong>
                         </div>
                         <div className="text-strong mt-3">
                             <h2><MDBIcon icon="database" /> {this.props.fullData.length}</h2>
@@ -100,7 +100,7 @@ class VolumeReport extends Component {
             <MDBRow >
                 <MDBCol md="12"lg="8" className="my-3">
                     <LineChart 
-                        title="Line Chart" 
+                        title="LINE CHART" 
                         dataLabel = "Average Daily Traffic Volume Captured Per Month"
                         labels={this.state.labels} 
                         data={this.state.data}/>
