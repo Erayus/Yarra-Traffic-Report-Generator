@@ -5,7 +5,8 @@ import {connect} from 'react-redux';
 import './App.css';
 import VolumeReport from './containers/VolumeReport/VolumeReport.container';
 import SideNav from './components/Navigation/SideNav/SideNav.component';
-import SpeedReport from './containers/SpeedReport/SpeedReport.container'
+import SpeedReport from './containers/SpeedReport/SpeedReport.container';
+import TopNav from './components/Navigation/TopNav/TopNav.component';
 import * as actionTypes from './store/actions/traffic';
 import axios from './axios';
 
@@ -27,6 +28,7 @@ class App extends Component {
       <div className="App">
         <SideNav/>
         <div className="App-content">
+          <TopNav/>
           <Switch>
             <Route path='/volume-report' component={VolumeReport}/>
             <Route path='/speed-report' component={SpeedReport}/>
