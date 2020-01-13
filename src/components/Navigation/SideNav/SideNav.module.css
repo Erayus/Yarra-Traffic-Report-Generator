@@ -8,13 +8,21 @@
     max-width: 70%;
     background-color: #2E2E2E;
     box-sizing: border-box;
-    padding: 32px 16px;
+    padding: 32px 0px;
     transition: transform 0.3s ease-out;
     color: white;
 }
-
 .SideNav ul {
     list-style: none;
     text-align: left;
     padding: 0;
+}
+
+.SideNav ul li{
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.Active{
+    background-color:#212121;
 }

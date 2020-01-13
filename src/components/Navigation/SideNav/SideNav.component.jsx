@@ -1,18 +1,20 @@
 import React, {Component} from 'react';
-// import Logo from '../../../logo.sgv';
+import Logo from '../../../logo.svg';
 import classes from './SideNav.module.css';
+import { MDBIcon } from "mdbreact";
+
 
 const sideNav = (props) => {
     return  (
         <React.Fragment>
-            <div className={classes.SideNav} onClick={props.closeDrawer}>
+            <div className={classes.SideNav}>
                 <div className={classes.Logo}>
-                    <img src=''/>
+                    <img className="mb-3" src={Logo}/>
                 </div>
                 <nav>
                    <ul>
-                       <li>Volume Per Day</li>
-                       <li>Vehicles</li>
+                       <li><MDBIcon icon="chart-line" className="mr-2"/>Volume Per Day</li>
+                       <li><MDBIcon icon="car" className="mr-2"/>Vehicles</li>
                    </ul>
                 </nav>
             </div>

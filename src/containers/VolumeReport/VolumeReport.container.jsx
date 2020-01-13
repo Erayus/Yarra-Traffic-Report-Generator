@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import LineChart  from '../../components/LineChart/line-chart';
+import LineChart  from '../../components/LineChart/LineChart.component';
 
 export default class VolumeReport extends Component {
     
@@ -53,7 +53,6 @@ export default class VolumeReport extends Component {
   render() {
     return (
       <div className="App">
-
         <LineChart labels={this.state.labels} data={this.state.data}/>
       </div>
     );

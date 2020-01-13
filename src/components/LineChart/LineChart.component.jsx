@@ -1,7 +1,7 @@
 import React from 'react';
 import { Chart } from '@bit/primefaces.primereact.chart';
 
- const linechart = (props) => {
+ const lineChart = (props) => {
     const data = {
     labels:props.labels,
     datasets: [
@@ -31,5 +31,5 @@ import { Chart } from '@bit/primefaces.primereact.chart';
         
     )
 }
-export default linechart;
+export default lineChart;
 
