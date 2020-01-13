@@ -1,7 +1,10 @@
 # Yarra Traffic Report Generator
+<<<<<<< HEAD
 
 ## Demo: 
 http://ytrg.erayus.com.s3-website-ap-southeast-2.amazonaws.com/
+=======
+>>>>>>> 0c983e75f72491201920b5f361a75b707571cd87
 
 ## Technology stack
 - **React:** This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -16,7 +19,11 @@ http://ytrg.erayus.com.s3-website-ap-southeast-2.amazonaws.com/
 ## Improvements:
 - Mobile UI
 - Generate Report for the "85th Percentile Speed"
+<<<<<<< HEAD
 - Refactor Navigation Item to its own component (more reusable)
 
 ## Deployment
 - I use my developed CLI (Webotron, refer to package.json) to automate the deployment process to a AWS S3 bucket which is setup to be a static website
+=======
+- Refactor Navigation Item to its own component (more reusable)
+>>>>>>> 0c983e75f72491201920b5f361a75b707571cd87
