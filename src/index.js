@@ -7,11 +7,23 @@ import {BrowserRouter} from 'react-router-dom';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+
+
+
+import trafficReducer from './store/reducers/traffic';
+
+
+const store = createStore(trafficReducer)
 
 const app = (
+    <Provider store={store}>
         <BrowserRouter>
             <App />
-        </BrowserRouter>
+        </BrowserRouter>    
+    </Provider>
+        
 )
 
 
