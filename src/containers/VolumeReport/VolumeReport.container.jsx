@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
-import axios from '../../axios';
 import LineChart  from '../../components/LineChart/LineChart.component';
+import { connect } from 'react-redux';
+import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 
-export default class VolumeReport extends Component {
+class VolumeReport extends Component {
     
     state = {
+        dataSet: {},
         labels: [],
         data: [],
+    }
+
+    generateReportingData = (fullData) => {
+            // Filter out unnecessary data and convert date in string to Date
+            let dateAndVolumeRecords = fullData.map(record => {
+                return { "date_captured": this.dateConverter(record.date_captured),  "volume_per_day": record.volume_per_day}
+            });
+            // Sort based on date
+            let sortedDateAndVolumeRecords = dateAndVolumeRecords.sort((a, b) => a.date_captured - b.date_captured);
+            
+            // Generate aggregatedData (sum of volume per day based on the date)
+            let aggregatedData = this.aggregateData(sortedDateAndVolumeRecords)
+
+            // Calculate the average sum of volume per day
+            let averagedDataArray = this.averageData(aggregatedData);
+            
+            const labelArray = averagedDataArray.map(data => data["date_captured"]);
+            const dataArray = averagedDataArray.map(data => data["average_volume_per_day"]);
+
+            this.setState({dataSet: averagedDataArray, labels: labelArray, data: dataArray});
     }
 
     dateConverter(dateStr){ //dateStr in YYYY-MMM formate (e.g 2020-Feb)
@@ -15,46 +37,75 @@ export default class VolumeReport extends Component {
         let [year, month] = dateStr.split("-");
         return new Date(+year, monthMap[month]);
     }
-    
-    componentDidMount() {
-        axios.get()
-            .then(res => {
-            let fullRecords = res.data.result.records;
-            // Filter out unnecessary data and convert date in string to Date
-            let dateAndVolumeRecords = fullRecords.map(record => {
-                return { "date_captured": this.dateConverter(record.date_captured),  "volume_per_day": record.volume_per_day}
-            });
-            
-            let sortedDateAndVolumeRecords = dateAndVolumeRecords.sort((a, b) => a.date_captured - b.date_captured);
-            
-            let aggregatedData = sortedDateAndVolumeRecords.reduce((aggregated, curData) => {
-                let key = curData["date_captured"].getFullYear() + '-' + String(+curData["date_captured"].getMonth() + 1)
-                // let key = curData[]
-                aggregated[key] = aggregated[key] || {};
-                aggregated[key]["volume_per_day"] =  aggregated[key]["volume_per_day"] ?  +aggregated[key]["volume_per_day"] + +curData.volume_per_day : +curData.volume_per_day;
-                aggregated[key]["no_of_records"] = ++aggregated[key]["no_of_records"] || 1;
-                return aggregated;  
-            },{});
 
-            let reportingData = {};
-            for (let captureDate of Object.keys(aggregatedData)) {
-                reportingData[captureDate] = aggregatedData[captureDate]["volume_per_day"] / aggregatedData[captureDate]["no_of_records"];
-            }
-
-            const labelArray = Object.keys(reportingData);
-            const dataArray = Object.keys(reportingData).map(key => reportingData[key]);
-
-            this.setState({labels: labelArray, data: dataArray});
-
-            console.log(aggregatedData);
-        })
+    // Input: [{date_captured: value<Date>, volume_per_day: value<Number>}]
+    // Output : [
+    //  {"YYYY-MM": {
+    //      "sum_volume_per_day": sum_of_volumes<Number>
+    //      "no_of_records": value<Number>
+    // }}]
+    aggregateData (sortedDateAndVolumeRecords) {
+        return sortedDateAndVolumeRecords.reduce((aggregated, curData) => {
+            let key = curData["date_captured"].getFullYear() + '-' + String(+curData["date_captured"].getMonth() + 1)
+            // let key = curData[]
+            aggregated[key] = aggregated[key] || {};
+            aggregated[key]["sum_volume_per_day"] =  aggregated[key]["sum_volume_per_day"] ?  +aggregated[key]["sum_volume_per_day"] + +curData.volume_per_day : +curData.volume_per_day;
+            aggregated[key]["no_of_records"] = ++aggregated[key]["no_of_records"] || 1;
+            return aggregated;  
+        },{});
     }
-    
+
+    // Input: aggregatedData
+    // Output: [{"date_captured": "YYYY-MM", "average_volume_per_day": value<Number>}] 
+    averageData(aggregatedData) {
+        let averagedDataArray = [];
+        for (let captureDate of Object.keys(aggregatedData)) {
+            let averageDataObj = {
+                "date_captured": captureDate,
+                "average_volume_per_day": aggregatedData[captureDate]["sum_volume_per_day"] / aggregatedData[captureDate]["no_of_records"]
+            };
+            averagedDataArray.push(averageDataObj)
+        } 
+
+        return averagedDataArray
+    }
+
   render() {
     return (
-      <div className="App">
-        <LineChart labels={this.state.labels} data={this.state.data}/>
+      <div className="">
+        <MDBContainer>
+            <MDBRow>
+                <MDBCol md="8">
+                    <LineChart title="Volume Report" 
+                            dataLabel = "Average Daily Traffic Volume Captured Per Month"
+                            labels={this.state.labels} 
+                            data={this.state.data}/>
+                 </MDBCol>
+                 <MDBCol md="4">
+                    <LineChart title="Volume Report" 
+                            dataLabel = "Average Daily Traffic Volume Captured Per Month"
+                            labels={this.state.labels} 
+                            data={this.state.data}/>
+                 </MDBCol>
+            </MDBRow>
+
+        </MDBContainer>
+       
       </div>
     );
   }
+
+  componentDidUpdate() {    
+    //If reportingData is already generated
+    if (this.state.data.length === 0) {
+        this.generateReportingData(this.props.fullData);
+    }
+  }
 }
+const mapPropsToState = (state) => {
+    return {
+        fullData: state.fullData
+    }
+}
+
+export default connect(mapPropsToState)(VolumeReport);
