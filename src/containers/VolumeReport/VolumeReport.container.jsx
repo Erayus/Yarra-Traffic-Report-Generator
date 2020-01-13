@@ -100,7 +100,7 @@ class VolumeReport extends Component {
             <MDBRow >
                 <MDBCol md="12"lg="8" className="my-3">
                     <LineChart 
-                        title="Volume Report" 
+                        title="Line Chart" 
                         dataLabel = "Average Daily Traffic Volume Captured Per Month"
                         labels={this.state.labels} 
                         data={this.state.data}/>

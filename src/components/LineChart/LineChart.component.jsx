@@ -15,14 +15,29 @@ import classes from './LineChart.module.css';
     };
 
     const options = {
-    title: {
-        display: true,
-        text: props.title,
-        fontSize: 24
-    },
-    legend: {
-        position: 'bottom'
-    }
+        title: {
+            display: true,
+            text: props.title,
+            fontSize: 26,
+            fontColor: '#3F729B'
+        },
+        legend: {
+            position: 'bottom'
+        },
+        scales: {
+            yAxes: [{
+            scaleLabel: {
+                display: true,
+                labelString: 'Average Volume Per Day'
+            }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Month'
+                }
+                }]
+        } 
     }
     return (
         <div className={[classes.LineChart, "z-depth-1", "rounded"].join(' ') }>
