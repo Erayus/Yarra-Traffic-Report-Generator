@@ -1,12 +1,12 @@
 import React from 'react';
 import { Chart } from '@bit/primefaces.primereact.chart';
-
+import classes from './LineChart.module.css';
  const lineChart = (props) => {
     const data = {
     labels:props.labels,
     datasets: [
         {
-        label: 'First Dataset',
+        label: props.dataLabel,
         data: props.data,
         fill: false,
         borderColor: '#4bc0c0'
@@ -17,15 +17,15 @@ import { Chart } from '@bit/primefaces.primereact.chart';
     const options = {
     title: {
         display: true,
-        text: 'My Title',
-        fontSize: 16
+        text: props.title,
+        fontSize: 24
     },
     legend: {
         position: 'bottom'
     }
     }
     return (
-        <div style={{ width: 700 }}>
+        <div className={[classes.LineChart, "z-depth-1", "rounded"].join(' ') }>
             <Chart type='line' data={data} options={options} />
         </div>
         
