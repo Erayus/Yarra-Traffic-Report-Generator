@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
-MDBNavbar, MDBIcon, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBCollapse,
- MDBDropdownMenu
+MDBNavbar, MDBIcon, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBCollapse
 } from "mdbreact";
 import moment from "moment";
 
@@ -13,7 +12,7 @@ const  topNav = (props) => {
         <MDBCollapse id="navbarCollapse3" navbar>
           <MDBNavbarNav>
                 <MDBNavbarBrand>
-                <strong className="white-text pl-5">Yarra Traffic Report Generator</strong>
+                <strong className="white-text pl-5" style={{fontSize: '24px'}}>Yarra Traffic Report Generator</strong>
             </MDBNavbarBrand>
           </MDBNavbarNav>
           <MDBNavbarNav right>

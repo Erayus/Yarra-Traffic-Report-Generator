@@ -6,10 +6,10 @@ import classes from './LineChart.module.css';
     labels:props.labels,
     datasets: [
         {
-        label: props.dataLabel,
-        data: props.data,
-        fill: false,
-        borderColor: '#4bc0c0'
+            label: props.dataLabel,
+            data: props.data,
+            fill: false,
+            borderColor: '#0099CC'
         }
     ]
     };

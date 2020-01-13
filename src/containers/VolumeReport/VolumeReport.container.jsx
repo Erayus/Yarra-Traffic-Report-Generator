@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import LineChart  from '../../components/LineChart/LineChart.component';
 import { connect } from 'react-redux';
-import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBIcon} from "mdbreact";
 import Table from '../../components/Table/Table.component';
 
 class VolumeReport extends Component {
@@ -85,7 +85,19 @@ class VolumeReport extends Component {
     return (
       <div className="">
         <MDBContainer>
-            <MDBRow style={{maxHeight: ''}}>
+            <MDBRow className="justify-content-center mb-4">
+                <MDBCol sm="12" md="8">
+                    <div className="rounded z-depth-1 text-center pb-2">
+                        <div className="py-3 text-white" style={{backgroundColor: '#33b5e5', fontSize: '20px'}}>
+                            <strong>Number Of Records</strong>
+                        </div>
+                        <div className="text-strong mt-3">
+                            <h2><MDBIcon icon="database" /> {this.props.fullData.length}</h2>
+                        </div>
+                    </div>  
+                </MDBCol>
+            </MDBRow>
+            <MDBRow >
                 <MDBCol md="12"lg="8" className="my-3">
                     <LineChart 
                         title="Volume Report" 

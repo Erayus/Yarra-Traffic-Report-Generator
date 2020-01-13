@@ -21,7 +21,7 @@ console.log(props.dataSet);
         striped 
         scrollY
         maxHeight="390px">
-      <MDBTableHead color="elegant-color-dark"  textWhite>
+      <MDBTableHead color="blue-gradient"  textWhite>
         <tr>
           {tableHeads}
         </tr>
