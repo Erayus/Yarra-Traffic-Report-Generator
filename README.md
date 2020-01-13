@@ -1,5 +1,4 @@
 # Yarra Traffic Report Generator
-*Challenged by BLIX*
 
 ## Technology stack
 - **React:** This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -9,7 +8,12 @@
 - **Momentjs**
 - **React Router Dom**
 - **Axios**
+- **AWS S3**
 
 ## Improvements:
 - Mobile UI
 - Generate Report for the "85th Percentile Speed"
+- Refactor Navigation Item to its own component (more reusable)
+
+## Deployment
+- I use my developed CLI (Webotron, refer to package.json) to automate the deployment process to a AWS S3 bucket which is setup to be a static website
