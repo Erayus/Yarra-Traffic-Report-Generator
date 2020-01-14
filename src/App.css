@@ -41,4 +41,9 @@
     transform: rotate(360deg);
   }
 }
+@media (max-width: 768px) { 
+  .App-content {
+    margin-left: 0px;
+  }
+}
 

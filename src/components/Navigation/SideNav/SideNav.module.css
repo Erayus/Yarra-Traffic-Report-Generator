@@ -16,7 +16,6 @@
     list-style: none;
     text-align: left;
     padding: 0;
-    
 }
 
 .SideNav ul li {
@@ -36,4 +35,10 @@
 
 .SideNav ul li a.active{
     background-color:#212121;
+}
+
+@media (max-width: 768px) { 
+    .SideNav {
+        display: none
+    }
 }
