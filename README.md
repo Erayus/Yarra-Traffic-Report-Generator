@@ -26,6 +26,3 @@ http://ytrg.erayus.com.s3-website-ap-southeast-2.amazonaws.com/
 1. Clone this repo
 2. Run npm install
 3. Run npm start
-=======
-=======
-- Refactor Navigation Item to its own component (more reusable)
