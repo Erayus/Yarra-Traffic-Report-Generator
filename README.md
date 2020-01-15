@@ -20,7 +20,6 @@ http://ytrg.erayus.com.s3-website-ap-southeast-2.amazonaws.com/
 
 ## Deployment
 - I use my developed CLI (Webotron, refer to package.json) to automate the deployment process to a AWS S3 bucket which is setup to be a static website
-- Refactor Navigation Item to its own component (more reusable)
 
 ## Development
 1. Clone this repo
