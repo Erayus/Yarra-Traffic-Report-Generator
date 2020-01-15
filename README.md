@@ -1,8 +1,5 @@
 # Yarra Traffic Report Generator
 
-## Demo: 
-http://ytrg.erayus.com.s3-website-ap-southeast-2.amazonaws.com/
-
 ## Technology stack
 - **React:** This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 - **Redux and React-Redux:** Allow fetching full set of data ONCE and using them across the components 
