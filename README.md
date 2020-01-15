@@ -1,7 +1,7 @@
 # Yarra Traffic Report Generator
 
 ## Demo: 
-http://ytrg.erayus.com.s3-website-ap-southeast-2.amazonaws.com/
+https://erayus.github.io/yarra-traffic-report-generator/
 
 ## Technology stack
 - **React:** This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
