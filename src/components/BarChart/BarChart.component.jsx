@@ -5,18 +5,43 @@ import { Chart } from '@bit/primefaces.primereact.chart';
 const BarChart = (props) => {
 
     const data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        labels: props.labels,
         datasets: [
           {
-            label: 'My First dataset',
+            label: props.dataTitle,
             backgroundColor: '#42A5F5',
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: props.data
           },
         ] 
       };
+      const options = {
+        title: {
+            display: true,
+            text: props.title,
+            fontSize: 20,
+            fontColor: '#3F729B'
+        },
+        legend: {
+            position: 'bottom'
+        },
+        scales: {
+            yAxes: [{
+            scaleLabel: {
+                display: true,
+                labelString: 'Average Volume Per Day'
+            }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Month'
+                }
+                }]
+        } 
+    }
     return (
         <div className='content-section implementation'>
-            <Chart type='horizontalBar' data={data} />
+            <Chart type='horizontalBar' data={data} options= {options}/>
         </div>
     );
 }

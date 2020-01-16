@@ -9,7 +9,7 @@ import {aggregateData, averageData} from '../../_shared/helpers';
 class VolumeReport extends Component {
     
     state = {
-        dataSet: [],
+        tableData: [],
         labels: [],
         data: [],
     }
@@ -31,7 +31,7 @@ class VolumeReport extends Component {
             const labelArray = averagedDataArray.map(data => data["date_captured"]);
             const dataArray = averagedDataArray.map(data => data["volume_per_day"]);
 
-            this.setState({dataSet: averagedDataArray, labels: labelArray, data: dataArray});
+            this.setState({tableData: averagedDataArray, labels: labelArray, data: dataArray});
     }
 
     dateConverter(dateStr){ //dateStr in YYYY-MMM formate (e.g 2020-Feb)
@@ -44,7 +44,7 @@ class VolumeReport extends Component {
   
   render() {
 
-    const table = this.state.dataSet.length > 0 ? <Table dataSet={this.state.dataSet}/> : null;
+    const table = this.state.tableData.length > 0 ? <Table dataSet={this.state.tableData}/> : null;
     return (
       <div className="">
         <MDBContainer>
@@ -63,8 +63,8 @@ class VolumeReport extends Component {
             <MDBRow >
                 <MDBCol md="12"lg="8" className="my-3">
                     <LineChart 
-                        title="LINE CHART" 
-                        dataLabel = "Average Daily Traffic Volume Captured Per Month"
+                        title="Average Daily Traffic Volume Captured Per Month" 
+                        dataLabel = "Average Daily Traffic Volume"
                         labels={this.state.labels} 
                         data={this.state.data}/>
                  </MDBCol>
