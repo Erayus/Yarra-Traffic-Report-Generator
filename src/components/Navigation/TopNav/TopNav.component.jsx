@@ -11,11 +11,11 @@ const  topNav = (props) => {
         
           <MDBNavbarNav>
                 <MDBNavbarBrand>
-                <strong className="white-text pl-5" style={{fontSize: '24px'}}>Yarra Traffic Reporter</strong>
+                <strong className="white-text pl-5" style={{fontSize: '28px', fontFamily: 'Audiowide'}}>Yarra Traffic Reporter</strong>
             </MDBNavbarBrand>
           </MDBNavbarNav>
           <MDBNavbarNav right className={classes.RightNav}>
-            <MDBNavItem  style={{color: 'white', background: '#4B515D', width: '150px', padding: '10px 0px'}}>
+            <MDBNavItem  className="rounded aqua-gradient z-depth-2" style={{color: 'white', width: '150px', padding: '10px 0px'}}>
                 <MDBIcon far icon="calendar-alt" className="mr-1" /> {moment().format("MMM Do YY")}
             </MDBNavItem>
           </MDBNavbarNav>

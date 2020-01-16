@@ -88,7 +88,7 @@ class VolumeReport extends Component {
             <MDBRow className="justify-content-center mb-4">
                 <MDBCol sm="12" md="8">
                     <div className="rounded z-depth-1 text-center pb-2">
-                        <div className="py-3 text-white" style={{backgroundColor: '#33b5e5', fontSize: '20px'}}>
+                        <div className="py-3 text-white blue-gradient" style={{fontSize: '20px'}}>
                             <strong>NUMBER OF RECORDS</strong>
                         </div>
                         <div className="text-strong mt-3">

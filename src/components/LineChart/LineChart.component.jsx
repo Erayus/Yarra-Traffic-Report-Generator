@@ -40,7 +40,7 @@ import classes from './LineChart.module.css';
         } 
     }
     return (
-        <div className={[classes.LineChart, "z-depth-1", "rounded"].join(' ') }>
+        <div className={[classes.LineChart, "z-depth-1", "rounded"].join(' ')} >
             <Chart type='line' data={data} options={options} />
         </div>
         

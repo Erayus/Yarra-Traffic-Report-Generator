@@ -9,7 +9,7 @@ const sideNav = (props) => {
     return  (
         <React.Fragment>
             <div className={classes.SideNav}>
-                <div className="pt-2"style={{height: '60px', borderBottom: '2px solid #212121'}}>
+                <div className="pt-2"style={{height: '67px', borderBottom: '2px solid #212121'}}>
                     <h2 style={{fontFamily: "Teko, sans-serif", fontSize: '40px'}}>Erayus</h2>
                 </div>
                 <div className={classes.Logo}>
