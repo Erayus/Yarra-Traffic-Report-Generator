@@ -3,7 +3,6 @@ import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 const BasicTable = (props) => {
 
-console.log(props.dataSet);
  const tableHeads = Object.keys(props.dataSet[0]).map((headTitle) => {
      return <th key={headTitle}>{headTitle.replace(/_/g, " ").toUpperCase()}</th>
  });

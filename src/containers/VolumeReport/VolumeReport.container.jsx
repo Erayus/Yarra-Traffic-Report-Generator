@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import LineChart  from '../../components/LineChart/LineChart.component';
 import { connect } from 'react-redux';
 import { MDBContainer, MDBRow, MDBCol, MDBIcon} from "mdbreact";
+
 import Table from '../../components/Table/Table.component';
+import {aggregateData, averageData} from '../../_shared/helpers';
 
 class VolumeReport extends Component {
     
@@ -19,21 +21,15 @@ class VolumeReport extends Component {
       }
 
     generateReportingData = (fullData) => {
-            // Filter out unnecessary data and convert date in string to Date
-            let dateAndVolumeRecords = fullData.map(record => {
-                return { "date_captured": this.dateConverter(record.date_captured),  "volume_per_day": record.volume_per_day}
-            });
-            // Sort based on date
-            let sortedDateAndVolumeRecords = dateAndVolumeRecords.sort((a, b) => a.date_captured - b.date_captured);
-            
             // Generate aggregatedData (sum of volume per day based on the date)
-            let aggregatedData = this.aggregateData(sortedDateAndVolumeRecords)
-
+            let aggregatedData = aggregateData(fullData, "date_captured", "volume_per_day");
             // Calculate the average sum of volume per day
-            let averagedDataArray = this.generateFinalData(aggregatedData);
+            let averagedDataArray = averageData(aggregatedData, "date_captured", "volume_per_day");
             
+            averagedDataArray.sort((a,b) => {return this.dateConverter(a.date_captured) - this.dateConverter(b.date_captured)});
+
             const labelArray = averagedDataArray.map(data => data["date_captured"]);
-            const dataArray = averagedDataArray.map(data => data["average_volume_per_day"]);
+            const dataArray = averagedDataArray.map(data => data["volume_per_day"]);
 
             this.setState({dataSet: averagedDataArray, labels: labelArray, data: dataArray});
     }
@@ -45,40 +41,7 @@ class VolumeReport extends Component {
         return new Date(+year, monthMap[month]);
     }
 
-    // Input: [{date_captured: value<Date>, volume_per_day: value<Number>}]
-    // Output : [
-    //  {"YYYY-MM": {
-    //      "sum_volume_per_day": sum_of_volumes<Number>
-    //      "no_of_records": value<Number>
-    // }}]
-    aggregateData (sortedDateAndVolumeRecords) {
-        return sortedDateAndVolumeRecords.reduce((aggregated, curData) => {
-            let key = curData["date_captured"].getFullYear() + '-' + String(+curData["date_captured"].getMonth() + 1)
-            // let key = curData[]
-            aggregated[key] = aggregated[key] || {};
-            aggregated[key]["sum_volume_per_day"] =  aggregated[key]["sum_volume_per_day"] ?  +aggregated[key]["sum_volume_per_day"] + +curData.volume_per_day : +curData.volume_per_day;
-            aggregated[key]["no_of_records"] = ++aggregated[key]["no_of_records"] || 1;
-            return aggregated;  
-        },{});
-    }
-
-    // Input: aggregatedData
-    // Output: [{"date_captured": "YYYY-MM", "average_volume_per_day": value<Number>}] 
-    generateFinalData(aggregatedData) {
-        let averagedDataArray = [];
-        let id = 0;
-        for (let captureDate of Object.keys(aggregatedData)) {
-            let averageDataObj = {
-                "id": ++id,
-                "date_captured": captureDate,
-                "average_volume_per_day": (aggregatedData[captureDate]["sum_volume_per_day"] / aggregatedData[captureDate]["no_of_records"]).toFixed(2)
-            };
-            averagedDataArray.push(averageDataObj)
-        } 
-
-        return averagedDataArray
-    }
-
+  
   render() {
 
     const table = this.state.dataSet.length > 0 ? <Table dataSet={this.state.dataSet}/> : null;
