@@ -1,7 +1,6 @@
 {
-  "name": "yarra-traffic-report-generator",
+  "name": "yarra-traffic-reporter",
   "version": "0.1.0",
-  "homepage": "https://erayus.github.io/yarra-traffic-report-generator",
   "private": true,
   "dependencies": {
     "@bit/primefaces.primereact.chart": "^3.1.8",
@@ -23,8 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "webotron sync ./build ytrg.erayus.com"
+    "deploy": "npm run build && webotron sync ./build ytr.erayus.com"
   },
   "eslintConfig": {
     "extends": "react-app"

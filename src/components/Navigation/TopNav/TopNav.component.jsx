@@ -11,7 +11,7 @@ const  topNav = (props) => {
         
           <MDBNavbarNav>
                 <MDBNavbarBrand>
-                <strong className="white-text pl-5" style={{fontSize: '24px'}}>Yarra Traffic Report Generator</strong>
+                <strong className="white-text pl-5" style={{fontSize: '24px'}}>Yarra Traffic Reporter</strong>
             </MDBNavbarBrand>
           </MDBNavbarNav>
           <MDBNavbarNav right className={classes.RightNav}>
