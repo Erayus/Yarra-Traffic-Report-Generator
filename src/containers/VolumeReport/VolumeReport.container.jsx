@@ -44,7 +44,8 @@ class VolumeReport extends Component {
   
   render() {
 
-    const table = this.state.tableData.length > 0 ? <Table dataSet={this.state.tableData}/> : null;
+    const table = this.state.tableData.length > 0 ? <Table dataSet={this.state.tableData.sort((a, b) => a.id - b.id)}/> : null;
+
     return (
       <div className="">
         <MDBContainer>

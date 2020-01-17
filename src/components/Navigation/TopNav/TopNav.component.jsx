@@ -7,7 +7,7 @@ import classes from './TopNav.module.css';
 const  topNav = (props) => {
 
   return (
-      <MDBNavbar color="elegant-color-dark" dark expand="md" className="mb-5">
+      <MDBNavbar color="elegant-color-dark"  dark expand="md" className="mb-5">
         
           <MDBNavbarNav>
                 <MDBNavbarBrand>

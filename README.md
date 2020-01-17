@@ -14,8 +14,7 @@ http://ytr.erayus.com.s3-website-ap-southeast-2.amazonaws.com/
 - **AWS S3**
 
 ## Improvements:
-- ~~Mobile UI~~
-- Generate Report for the "85th Percentile Speed"
+- ~~Generate Report for the "85th Percentile Speed"~~
 - Refactor Navigation Item to its own component (more reusable)
 
 ## Deployment
